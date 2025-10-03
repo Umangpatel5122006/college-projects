@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reset Password</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(-45deg, #8ec5fc, #e0c3fc, #a1c4fd, #c2e9fb);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .reset-container {
+      width: 100%;
+      max-width: 450px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-radius: 1rem;
+      padding: 2.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      animation: fadeInUp 1s ease forwards;
+      transform: translateY(50px);
+      opacity: 0;
+      color: #222;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .reset-container h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #222;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      background: #fff;
+      color: #333;
+      font-size: 1rem;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    input::placeholder {
+      color: #aaa;
+    }
+
+    input:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+      outline: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #4f46e5;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #4338ca;
+      transform: translateY(-2px);
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 1rem;
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 480px) {
+      .reset-container {
+        padding: 2rem;
+      }
+    }
+    .nav {
+    background: rgba(44, 62, 80, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.nav2 {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.left a {
+    color: var(--light-text);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    position: relative;
+}
+
+.left a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.left a:hover::after {
+    width: 100%;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 2rem;
+    /* justify-content: space-around; */
+    list-style: none;
+    position: relative;
+}
+
+.nav-buttons button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--light-text);
+    cursor: pointer;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    transition: var(--transition);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-buttons button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.nav-buttons button:hover::before {
+    left: 100%;
+}
+
+.nav-buttons button:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.nav-buttons button:active {
+    transform: translateY(0);
+    transition: 0.1s;
+}
+
+/* Active State */
+.nav-buttons button.active {
+    background: var(--secondary-color);
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
+}
+
+
+  </style>
+</head>
+<body>
+
+  <div class="reset-container">
+    <h2>Reset Your Password</h2>
+    <form action="{%url 'reset'%}" method="POST">
+        {% csrf_token %}
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Your username" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Institute Email ID</label>
+        <input type="email" id="email" name="email" placeholder="you@institute.edu" required />
+      </div>
+      <div class="form-group">
+        <label for="new-password">Current Password</label>
+        <input type="password" id="new-password" name="current_password" placeholder="Enter new password" required />
+      </div>
+ 
+      <div class="form-group">
+        <label for="new-password">New Password</label>
+        <input type="password" id="new-password" name="new_password" placeholder="Enter new password" required />
+      </div>
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm_password" placeholder="Re-enter new password" required />
+      </div>
+      <button type="submit" class="btn">Reset Password</button>
+      <div class="message">Please use your official institute email ID.</div>
+    </form>
+  </div>
+
+  {%if success%}
+  <script>
+    alert('Password changed succesfully');
+    window.location.href = "{%url 'home'%}";
+  </script>
+  {%endif%}
+  {%if error1%}
+  <script>
+    alert('Your new password and confirm password do not match');
+  </script>
+  {%endif%}
+  {%if error2%}
+  <script>
+    alert("Invalid Credentials");
+  </script>
+  {%endif%}
+
+</body>
+</html>

@@ -1,0 +1,685 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules and Regulations</title>
+</head>
+<!-- <link rel="stylesheet" href="{% static 'studentsDb/rules/rule.css' %}"> -->
+<style>
+    :root {
+    --color-primary: #2c3e50;
+    --color-secondary: #3498db;
+    --color-accent: #e74c3c;
+    --bg-light: #f9f9f9;
+    --text-dark: #2c3e50;
+    --text-light: #ecf0f1;
+    --transition-default: all 0.3s ease;
+    --shadow-small: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* General Layout */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    transition: var(--transition-default);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Headings */
+.container h1 {
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: 3rem;
+    font-size: 2.8rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.container h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: var(--color-secondary);
+    border-radius: 2px;
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(44, 62, 80, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0.8rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition-default);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    transition: var(--transition-default);
+}
+
+.nav-logo a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-secondary);
+    transition: width 0.3s ease;
+}
+
+.nav-logo a:hover::after {
+    width: 100%;
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    position: relative;
+}
+
+.nav-buttons button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: var(--transition-default);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-buttons button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.nav-buttons button:hover::before {
+    left: 100%;
+}
+
+.nav-buttons button:hover {
+    background: var(--color-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.nav-buttons button:active {
+    transform: translateY(0);
+    transition: 0.1s;
+}
+
+.nav-buttons button.active {
+    background: var(--color-secondary);
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
+}
+
+/* Mobile Menu Icon */
+.menu-icon {
+    display: none;
+    cursor: pointer;
+    color: var(--text-light);
+    font-size: 1.5rem;
+}
+
+/* Content Sections */
+section {
+    background: rgb(0, 0, 0);
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition-default);
+}
+
+section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+section h2::before {
+    content: '⚖️';
+    font-size: 1.4rem;
+}
+
+/* Fines Section */
+.fines {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 4rem auto;
+    box-shadow: var(--shadow-medium);
+}
+
+.fines h2 {
+    color: var(--color-primary);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.fines p {
+    background: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    border-left: 4px solid var(--color-accent);
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    overflow: hidden;
+}
+
+thead {
+    background: var(--color-primary);
+    color: var(--text-light);
+}
+
+thead th {
+    padding: 1.2rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(236, 240, 241, 0.3);
+}
+
+tbody tr:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-primary);
+    color: var(--text-light);
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+}
+
+.footer-top,
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .container h1 {
+        font-size: 2rem;
+    }
+
+    section {
+        padding: 1.5rem;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-buttons {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--color-primary);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.5rem;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-buttons.active {
+        transform: scaleY(1);
+    }
+
+    .nav-buttons button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    ul li {
+        font-size: 0.95rem;
+    }
+
+    .fines h2 {
+        font-size: 1.6rem;
+    }
+}
+</style>
+
+<body>
+    <div class="nav">
+        <div class="nav2">
+            <div class="left">
+                <a href="{% url 'home'%}">Welcome to Gajjar Bhavan</a>
+            </div>
+            <div class="menu-icon">☰</div>
+            <div class="right">
+                <form method="post" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <ul class="nav-buttons" >
+                        <li><button type="submit" name="home">Home</button></li>
+                        <li><a href="{% url 'profile' %}"> <button type="button">Profile</button></a></li>                       
+                         <li><button type="submit" name="facilities">Facilities</button></li>
+                        <li><a href="{% url 'complaints' %}"></a><button type="submit" name="complaints">Complaints</button></li>
+                        <li><a href="{% url 'rules' %}"></a><button type="submit" name="rules">Rules & Regulations</button></li>
+                        <li><button type="submit" name="contact">Contact Us</button></li>
+                        <li><button type="submit" name="reset">Reset Password</button></li>
+                        <li><button type="submit" name="logout">Log Out</button></li>
+                        
+
+                    </ul>
+                </form>
+            </div>       
+        </div>
+    </div>
+    <div class="container">
+        <h1>SVNIT Hostel Rules & Regulations</h1>
+
+        <section>
+            <h2>General Conduct</h2>
+            <ul>
+                <li>Hostel stay is for the academic year unless expelled or withdrawn.</li>
+                <li>No misbehavior or disorderly conduct during events and gatherings.</li>
+                <li>Sexual harassment and privacy violations are strictly banned.</li>
+                <li>Students must not engage in political activities within the campus.</li>
+                <li>Unauthorized absenteeism from rooms is not allowed; strict action follows.</li>
+                <li>Keep noise levels low, especially during silence hours: 10 PM to 6 AM.</li>
+                <li>Rules are subject to revision and will be updated via hostel notice boards.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Visitors & Identity</h2>
+            <ul>
+                <li>Male visitors are not allowed in girls’ hostels and vice versa without permission.</li>
+                <li>Visitors must leave the hostel by 8 PM; no overnight stays allowed.</li>
+                <li>Hostel ID must be shown on request.</li>
+                <li>Visiting hours: 12 PM–2 PM and 4 PM–7 PM. Entry must be logged in register.</li>
+                <li>Unauthorized persons/services are not allowed inside hostels, especially girls’ hostels.</li>
+                <li>Gate pass is mandatory for late night or emergency movement.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Safety & Security</h2>
+            <ul>
+                <li>Room inspections by authorities can happen anytime without prior notice.</li>
+                <li>Students are responsible for the safety of their belongings.</li>
+                <li>Fire hazards like candles, incense sticks, and crackers are strictly prohibited.</li>
+                <li>Switch off fans, lights, and electrical devices when not in use.</li>
+                <li>Unauthorized use of fire extinguishers incurs heavy fines.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Disciplinary Actions</h2>
+            <ul>
+                <li>Any violation of rules may result in warnings, fines, suspension, or expulsion.</li>
+                <li>Repeat violations may result in loss of hostel privileges or degree recommendations.</li>
+                <li>Disciplinary action includes banning from placements or financial aid.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Room & Property</h2>
+            <ul>
+                <li>Students must stay in their allotted rooms and must not switch without permission.</li>
+                <li>Partying or celebrations in hostel rooms or premises without permission are not allowed.</li>
+                <li>Unauthorized meetings in hostel areas are prohibited.</li>
+                <li>Damage to property leads to fines or recovery costs.</li>
+                <li>All complaints must be logged in the complaint register.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Prohibited Items</h2>
+            <ul>
+                <li>Ragging is banned and will result in expulsion and police action.</li>
+                <li>No obscene literature, videos, or media possession is allowed.</li>
+                <li>Alcohol, drugs, smoking, tobacco, or any intoxicants are strictly prohibited.</li>
+                <li>Possession or consumption of narcotic substances leads to expulsion and police action.</li>
+                <li>Smoking is banned inside hostel buildings and common rooms.</li>
+                <li>Students must not harbor outsiders or unauthorized individuals.</li>
+                <li>Unauthorized electrical appliances like heaters, irons, etc., are not allowed.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Mess Rules</h2>
+            <ul>
+                <li>Mess participation is compulsory unless exempted due to health or official leave.</li>
+                <li>Mess menu is created by HMC in consultation with the mess manager.</li>
+                <li>Mess cut is applicable with prior permission for valid reasons only.</li>
+                <li>Food wastage and mess indiscipline are penalized.</li>
+                <li>Suggestions for mess must be made in the suggestion book.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Health & Hygiene</h2>
+            <ul>
+                <li>Medical issues must be reported to warden or institute doctor immediately.</li>
+                <li>Follow hygiene and cleanliness guidelines at all times.</li>
+                <li>Personal belongings should not be kept in common areas.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Special Conditions</h2>
+            <ul>
+                <li>Girls must follow extra safety rules, including local guardian visit procedures.</li>
+                <li>Leave form (Annexure 2) must be filled for any travel outside Surat.</li>
+                <li>No student may organize or attend picnics/excursions outside campus without permission.</li>
+                <li>All first-year students must return to the hostel by 7:30 PM every day.</li>
+                <li>Out-of-bounds and opposite-sex entry to hostels is strictly banned.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Anti-Ragging</h2>
+            <ul>
+                <li>Anti-ragging affidavit must be signed and submitted by all students.</li>
+                <li>Non-reporting of ragging incidents will also be punished.</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <section class="fines">
+        <h2>Gajjar Bhavan - Fine Structure</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rule No.</th>
+                    <th>Offense Description</th>
+                    <th>Minimum Fine (INR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Use of unauthorized electrical appliances (e.g., heaters, iron, etc.)</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Damage to hostel property/facilities</td>
+                    <td>2000</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Spreading abusive messages on social media / foul language</td>
+                    <td>3000</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Threatening or physical assault on other inmates</td>
+                    <td>5000</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Unauthorized parties/celebrations</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Consumption or storage of alcohol/drugs</td>
+                    <td>3000</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Gambling or cheating</td>
+                    <td>2000</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Loud music/videos during silence hours</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Smoking or possession of tobacco products</td>
+                    <td>2000</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Writing on walls/doors or pasting posters</td>
+                    <td>3000</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Painting in rooms without permission</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Pasting materials on walls/doors</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Misbehaving with staff or hostel inmates</td>
+                    <td>2000</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>Not switching off lights/fans when leaving</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>Entertaining unauthorized persons in hostel</td>
+                    <td>2000</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>Keeping pets / Mess food in rooms</td>
+                    <td>2000</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>Ragging or inappropriate interaction with juniors</td>
+                    <td>Expulsion</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>Unnecessary use of fire extinguishers</td>
+                    <td>3000</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>Wrong vehicle/bicycle parking</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>Spitting in hostel/campus area</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>Mess utensils found in room</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>Garbage found near room</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>No mask during pandemic</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>Late entry to institute gate (first 30 mins)</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>Late entry to hostel (first 30 mins)</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>Obstructing inspection / Giving false info</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>Carrying weapons or dangerous items</td>
+                    <td>Expulsion</td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td>Absent during nights without permission</td>
+                    <td>2000</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>Using motor vehicles without permission</td>
+                    <td>3000</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>Political canvassing / student election nuisance</td>
+                    <td>2000</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>Possessing stolen bicycle</td>
+                    <td>3000</td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>Possessing stolen valuables</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td>Indecent behavior anywhere in campus</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>Unauthorized room occupation/change</td>
+                    <td>1000</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Note:</strong> Fines are subject to double for second offense and triple for third. Fines above ₹5000
+            in one academic year disqualify a student from online room selection. Fines above ₹7000 lead to denial of
+            hostel admission the next year.</p>
+    </section>
+    <footer>
+        <div class="f1">
+            <p>Hostel Coordinating Unit ,Sardar Vallabhbhai National Institute of Technology,
+                Ichchhanath, Surat-395007,</p>
+            <p>Gujarat,India . Phone No : 00261-2201602</p>
+            <p>Email : hostel_office1@svnit.ac.in </p>
+        </div>
+        <div class="f2">
+            <p>Copyright © GBHCU, SVNIT</p>
+        </div>
+    </footer>
+   

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Login Page</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" action="">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="user_type" class="form-label">Login as:</label>
+            <select name="user_type" id="user_type" class="form-select" required>
+                <option value="">Select...</option>
+                <option value="student">Student</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+
+        <!-- <div id="credentials">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" name="username" id="username" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+        </div> -->
+
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+
+<!-- <script>
+    const userTypeSelect = document.getElementById('user_type');
+    const credentialsDiv = document.getElementById('credentials');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+
+    userTypeSelect.addEventListener('change', function () {
+        if (this.value === 'admin') {
+            credentialsDiv.style.display = 'none';
+            usernameInput.disabled = true;
+            passwordInput.disabled = true;
+        } else {
+            credentialsDiv.style.display = 'block';
+            usernameInput.disabled = false;
+            passwordInput.disabled = false;
+        }
+    });
+
+    // Trigger once on load
+    window.addEventListener('DOMContentLoaded', () => {
+        userTypeSelect.dispatchEvent(new Event('change'));
+    });
+</script>{% endblock %} -->

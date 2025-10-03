@@ -1,0 +1,580 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gajjar Bhavan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="{% static 'studentsDb/home/style.css' %}"> -->
+     <style>
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --light-bg: #f9f9f9;
+    --dark-text: #2c3e50;
+    --light-text: #ecf0f1;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: var(--dark-text);
+    background-color: #ffffff;
+}
+
+/* Navbar Styles */
+.nav {
+    background: rgba(44, 62, 80, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.nav2 {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.left a {
+    color: var(--light-text);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    position: relative;
+}
+
+.left a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.left a:hover::after {
+    width: 100%;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 2rem;
+    /* justify-content: space-around; */
+    list-style: none;
+    position: relative;
+}
+
+.nav-buttons button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--light-text);
+    cursor: pointer;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    transition: var(--transition);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-buttons button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.nav-buttons button:hover::before {
+    left: 100%;
+}
+
+.nav-buttons button:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.nav-buttons button:active {
+    transform: translateY(0);
+    transition: 0.1s;
+}
+
+/* Active State */
+.nav-buttons button.active {
+    background: var(--secondary-color);
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
+}
+
+/* Mobile Menu Icon */
+.menu-icon {
+    display: none;
+    cursor: pointer;
+    color: var(--light-text);
+    font-size: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav2 {
+        padding: 0 1rem;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-buttons {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--primary-color);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.5rem;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .nav-buttons.active {
+        transform: scaleY(1);
+    }
+
+    .nav-buttons button {
+        width: 100%;
+        justify-content: center;
+        border-radius: 6px;
+    }
+}
+
+.home {
+    height: 88vh;
+    min-height: 600px; /* Minimum height to maintain content visibility */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url("{%static 'studentsDb/home/svnit.jpg'%}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    color: var(--light-text);
+    padding: 2rem;
+    animation: fadeIn 1s ease-in;
+    position: relative;
+}
+
+/* Add overlay for better text readability */
+.home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.home p {
+    position: relative;
+    z-index: 2;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.home p {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.content {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background-color: var(--light-bg);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    line-height: 1.8;
+}
+
+.sw, .co {
+    max-width: 1200px;
+    margin: 3rem auto;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: var(--light-bg);
+    border-radius: 10px;
+}
+
+.sw img, .co img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--secondary-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.info1, .info2 {
+    flex: 1;
+}
+
+.info1 p, .info2 p {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.info1 p:first-child, .info2 p:first-child {
+    color: var(--secondary-color);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.warden {
+    max-width: 1200px;
+    margin: 4rem auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+.profile {
+    background-color: var(--light-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: var(--transition);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.profile:hover {
+    transform: translateY(-5px);
+}
+
+.profile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid var(--secondary-color);
+}
+
+.forms {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background-color: var(--light-bg);
+    border-radius: 10px;
+}
+
+.forms h2 {
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.forms ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.forms a {
+    color: var(--dark-text);
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: white;
+    display: block;
+    transition: var(--transition);
+    border-left: 4px solid var(--secondary-color);
+}
+
+.forms a:hover {
+    transform: translateX(10px);
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.num {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--primary-color);
+    color: white;
+    margin-top: 4rem;
+}
+
+.num h3 {
+    margin-bottom: 1rem;
+    color: var(--light-text);
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+}
+
+.f1 {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.f2 {
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .nav2 {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .home p {
+        font-size: 1.8rem;
+    }
+
+    .sw, .co {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+     </style>
+
+</head>
+
+<body>
+    <div class="nav">
+        <div class="nav2">
+            <div class="left">
+                <a href="{% url 'home'%}">Welcome to Gajjar Bhavan</a>
+            </div>
+            <div class="menu-icon">☰</div>
+            <div class="right">
+                <form method="post" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <ul class="nav-buttons" >
+                        <li><button type="submit" name="home">Home</button></li>
+                        <li><a href="{% url 'profile' %}"> <button type="button">Profile</button></a></li>                       
+                         <li><button type="submit" name="facilities">Facilities</button></li>
+                        <li><a href="{% url 'complaints' %}"></a><button type="submit" name="complaints">Complaints</button></li>
+                        <li><a href="{% url 'rules' %}"></a><button type="submit" name="rules">Rules & Regulations</button></li>
+                        <li><button type="submit" name="contact">Contact Us</button></li>
+                        <li><button type="submit" name="logout">Log Out</button></li>
+                        <li><button type="submit" name="reset">Reset Password</button></li>
+
+                    </ul>
+                </form>
+            </div>       
+        </div>
+    </div>
+    
+    <div class="home">
+        <p>Gajjar Bhavan Coordinating Unit</p>
+        <P>NIT SURAT</P>
+    </div>
+    <div class="content">
+
+        NIT Surat is a residential institute that provides accommodation to students wishing to reside in the hostels.
+        The
+        Overall supervision and administration are looked after by the Council of Wardens and the Hostel Office. The
+        dwelling
+        places are as modern as they can be, and the hostels have impressive architecture. All hostels are fully Wifi
+        connected,
+        meaning that the Internet permeates the space we live in. Hostel life is different from staying at home, away
+        from
+        parents, but you will realise that this is the phase of life where you will develop many lifelong connections,
+        and
+        become independent and disciplined with a vibrant and colourful atmosphere. With activities around the year, you
+        will
+        enjoy the pleasant journey that is ahead of you. This Hostel will become your second home and will play a huge
+        role in
+        transforming your life-changing travel. The hostel comprises 9 wings, labeled A to I, each thoughtfully designed
+        to accommodate the diverse needs of students. The architecture blends tradition with modernity, providing all
+        essential amenities to support both academic and
+        personal growth.. Each wing is well-lit,
+        highly ventilated and have drinking water on each floor. You can just sit by and enjoy the morning sunrise and
+        evening
+        sunset from your balconies leisurely. In the main hostels, students are given individual rooms with cots, study
+        tables,
+        spacious cupboards, and multi-plug points (do not forget the LAN).
+
+    </div>
+    <div class="sw">
+        <img src="{% static 'studentsDb/home/sr patel sir.png'%}" alt="Student Dean">
+        <div class="info1">
+            <p>Dr. Sanjay R. Patel</p>
+            <p>Professor</p>
+            <p>Dean Student Welfare</p>
+            <p>Email : srp@ched.svnit.ac.in</p>
+        </div>
+    </div>
+    <div class="co">
+        <img src="{% static 'studentsDb/home/rakesh sir.jpeg'%}" alt="Co Chairmain">
+        <div class="info2">
+            <p>Dr. Rakesh Maurya </p>
+            <p>Assistant Professor</p>
+            <p>Co-Chairman ,Council of Wardens</p>
+            <p>Email :  rmaurya@eed.svnit.ac.in</p>
+        </div>
+        <img src="{% static 'studentsDb/home/jogindar sir.png' %}" alt="Chief Warden">
+        <div class="info2">
+            <p>Dr. Jogender Singh</p>
+            <p>Assistant Professor</p>
+            <p>Chief Warden</p>
+            <p>Email : xyz@gmail.com</p>
+        </div>
+    </div>
+    <div class="warden">
+        <div class="profile">
+            <div class="i1">
+                <img src="{% static 'studentsDb/home/rohit sir.png'%}" alt="Warden">
+                <p>Dr. Rohit Kumar</p>
+                <p>Assistant Professor</p>
+                <p>Warden</p>
+                <p>Email :  rohitkumar@aid.svnit.ac.in</p>
+            </div>
+        </div>
+        <div class="profile">
+            <div class="i1">
+                <img src="{% static 'studentsDb/home/sumit sir.png'%}" alt="Warden">
+                <p>Dr. Sumit Khare</p>
+                <p>Professor</p>
+                <p>Warden</p>
+                <p>Email : sumitkhare@med.svnit.ac.in </p>
+            </div>
+        </div>
+        <div class="profile">
+            <div class="i1">
+                <img src="{% static 'studentsDb/home/vinet sir.png'%}" alt="Warden">
+                <p>Dr. Vineet K. Rathore</p>
+                <p>Assistant Professor</p>
+                <p>Warden</p>
+                <p>Email : vkrathore@ched.svnit.ac.in</p>
+            </div>
+        </div>
+        <div class="profile">
+            <div class="i1">
+                <img src="{% static 'studentsDb/home/reddy sir.png'%}" alt="Warden">
+                <p>Dr. Rajasekharareddy Chilipi</p>
+                <p>Assistant Professor</p>
+                <p>Warden</p>
+                <p>Email : rsreddy@eed.svnit.ac.in </p>
+            </div>
+        </div>
+    </div>
+    <div class="forms">
+        <h2>Important Forms</h2>
+        <ul>
+            <li><p><a href="https://drive.google.com/file/d/1FInFon6QUTp3qX7z9wzPrAgSiOyVXayi/view?usp=drive_link">Hostel Leaving Form</a></p></li>
+            <li><p><a href="https://drive.google.com/file/d/1-z_Q_LbnOe9TcNlUp1_TQcyIgl7u9CIT/view?usp=drive_link">Hostel Undertaking Form</a></p></li>
+            <li><p><a href="https://drive.google.com/file/d/10VjI5P3-sHUiDpi_0BzfprWA3JP9W8VI/view?usp=drive_link">Gate Pass</a></p></li>
+            <li><p><a href="https://drive.google.com/file/d/19_18Qot8pmh4RcSpi75WIWTsYzvh4Jk_/view?usp=drive_link">Personal Details</a></p></li>    
+        </ul>
+    
+    </div>
+    <div class="num">
+        <h3>Hostel Office Helpline Numbers</h3>
+        <p>Hostel Office Contact Numbers : 00261-2201602</p>
+    </div>
+    <footer>
+        <div class="f1">
+            <p>Hostel Coordinating Unit ,Sardar Vallabhbhai National Institute of Technology,
+                Ichchhanath, Surat-395007,</p>
+            <p>Gujarat,India . Phone No : 00261-2201602</p>
+            <p>Email : hostel_office1@svnit.ac.in </p>
+        </div>
+        <div class="f2">
+            <p>Copyright © GBHCU, SVNIT</p>
+        </div>
+    </footer>
+    <script>
+        document.querySelector('.menu-icon').addEventListener('click', () => {
+            const buttons = document.querySelector('.nav-buttons');
+            buttons.classList.toggle('active');
+        });
+        </script>
+
+    {% if logout %}
+    {
+        <script>
+            const result =confirm("Do you want to logout ?");
+            if(result == true)
+        {
+            window.location.href = "{%url 'student-login'%}";
+        }
+
+        </script>
+        
+    }
+    {%endif%}
+
+
+
+</body>
+
+</html
