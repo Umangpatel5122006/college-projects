@@ -17,7 +17,7 @@
         </p>
         <div class="hero-actions">
             <a href="{{ url_for('register') }}" class="btn-primary">Create free account</a>
-            <a href="#how" class="btn-primary">See how it works</a>
+            <a href="#how" id="open-video" class="btn-primary">See how it works</a>
         </div>
     </div>
     <div class="hero-mock">
@@ -67,6 +67,58 @@
         </div>
     </div>
 </section>
+
+<div id="video-modal" class="video-modal" hidden>
+    <div class="video-modal-backdrop" data-close></div>
+    <div class="video-modal-inner" role="dialog" aria-modal="true" aria-label="See how it works">
+        <button type="button" class="video-modal-close" data-close aria-label="Close">×</button>
+        <div class="video-modal-frame">
+            <iframe id="video-frame"
+                    src=""
+                    title="See how Spendly works"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    var VIDEO_URL = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0';
+    var modal = document.getElementById('video-modal');
+    var trigger = document.getElementById('open-video');
+    var frame = document.getElementById('video-frame');
+
+    if (!modal || !trigger || !frame) { return; }
+
+    function openModal(e) {
+        if (e) { e.preventDefault(); }
+        frame.src = VIDEO_URL;
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.hidden = true;
+        frame.src = '';          // destroys the iframe -> playback stops
+        document.body.style.overflow = '';
+    }
+
+    trigger.addEventListener('click', openModal);
+
+    modal.addEventListener('click', function (e) {
+        var t = e.target;
+        if (t && t.getAttribute && t.getAttribute('data-close') !== null) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.hidden) { closeModal(); }
+    });
+})();
+</script>
 
 <section class="features">
     <div class="features-inner">
