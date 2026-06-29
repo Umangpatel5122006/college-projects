@@ -1,0 +1,12 @@
+venv/
+.venv/
+__MACOSX/
+.DS_Store
+*.db
+*.sqlite
+*.sqlite3
+__pycache__/
+*.pyc
+*.pyo
+.env
+.claude/plans/
