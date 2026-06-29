@@ -1,0 +1,43 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    
+}
+.titlenav{
+    background-color: darkgray;
+    text-align: center;
+    width: 100%;    
+    height: 70px;
+    font-size: 70px;
+}
+.secondnav{
+    width: 100%;
+    padding-top: 50px;
+    height: 450px;
+    display: flex;
+    margin-left: 10px;
+}
+.info1{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    
+    
+}
+h3{
+    width: 15%;
+    align-self: center;
+}
+
+.pic{
+    margin-left: auto;
+    margin-right: 20px;
+    width: 24%;
+    
+}
+.pic img{
+    height: 75%;
+    width: 100%;
+    border-radius: 10px;
+}

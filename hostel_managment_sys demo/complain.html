@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Complaint Form</title>
+  <link rel="stylesheet" href="complain_style.css">
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Student Complaint Form</h2>
+    <form>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <label for="room">Room Number</label>
+      <input type="text" id="room" name="room" placeholder="e.g. A-203" required>
+
+      <label for="type">Complaint Type</label>
+      <select id="type" name="type" required>
+        <option value="">-- Select an option --</option>
+        <option value="Maintenance">Maintenance</option>
+        <option value="Cleanliness">Cleanliness</option>
+        <option value="Noise">Noise</option>
+        <option value="Water/Electricity">Water / Electricity</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="message">Complaint Details</label>
+      <textarea id="message" name="message" placeholder="Write your complaint here..." required></textarea>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+    <div class="footer">
+      &copy; 2025 Hostel Management System
+    </div>
+  </div>
+
+</body>
+</html>
